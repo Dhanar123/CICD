@@ -1,7 +1,18 @@
 
+from flask import Flask
+
+app = Flask(__name__)
+
 def add(a, b):
     return a + b
 
+@app.route("/")
+def home():
+    return "Hello! My CI/CD application is deployed successfully."
+
+@app.route("/health")
+def health():
+    return {"status": "healthy"}
+
 if __name__ == "__main__":
-    print("CI/CD Application Running")
-    print("Addition result:", add(10, 20))
+    app.run(host="0.0.0.0", port=5000)
