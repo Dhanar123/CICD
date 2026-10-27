@@ -1,0 +1,26 @@
+
+name: Basic CI-CD Pipeline
+
+on: [push]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build application
+        run: python -m compileall -q app.py
+
+      - name: Run tests
+        run: python -m unittest -v
+
+      - name: Deployment demonstration
+        run: python app.py
